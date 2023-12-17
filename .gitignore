@@ -1,7 +1,7 @@
 # Questions / Problem sheets
-*.pdf
-*.doc
-*.docx
+# *.pdf
+# *.doc
+# *.docx
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
