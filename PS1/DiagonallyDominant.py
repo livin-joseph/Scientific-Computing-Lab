@@ -4,34 +4,52 @@ def modsum(list1):
         s += abs(i)
     return s
 
-import numpy as np
+def diagonallyDominant(mat):
+    index = 0
+    for i in mat:
+        if modsum(i) - abs(i[index]) > abs(i[index]):
+            return False
+        index += 1
+    return True
 
-mat = []
+def strictlyDiagonallyDominant(mat):
+    index = 0
+    for i in mat:
+        if modsum(i) - abs(i[index]) >= abs(i[index]):
+            return False
+        index += 1
+    return True
 
-#r = int(input())
-#c = int(input())
+def main():
+    import numpy as np
 
-n = int(input("Enter number of rows/columns: "))
+    mat = []
 
-print("Enter the elements of the matrix")
+    #r = int(input())
+    #c = int(input())
 
-for i in range(n):
-    arr = []
-    for j in range(n):
-        arr.append(int(input()))
-    mat.append(arr)
+    n = int(input("Enter number of rows/columns: "))
 
-mat = np.array(mat)
-print(mat)
+    print("Enter the elements of the matrix")
 
-index = 0
-flag = True
-for i in mat:
-    if modsum(i) - abs(i[index]) > abs(i[index]):
+    for i in range(n):
+        arr = []
+        for j in range(n):
+            arr.append(int(input()))
+        mat.append(arr)
+
+    mat = np.array(mat)
+    print(mat)
+
+    if diagonallyDominant(mat) == True:
+        print("Matrix is diagonally dominant")
+    else:
         print("Matrix is not diagonally dominant")
-        flag = False
-        break
-    index += 1
 
-if flag == True:
-    print("Matrix is diagonally dominant")
+    if strictlyDiagonallyDominant(mat) == True:
+        print("Matrix is strictly diagonally dominant")
+    else:
+        print("Matrix is not strictly diagonally dominant")
+
+if __name__ == '__main__':
+    main()
