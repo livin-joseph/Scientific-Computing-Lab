@@ -69,14 +69,17 @@ def solveLinearSystem(coeff_matrix, const_matrix):
                         break
                 st = str(aug_matrix[rowIndex][var])
                 for j in range(var):
+                    if j in basic:
+                        continue
                     if aug_matrix[rowIndex][j] == 1 and leadingOne(aug_matrix, rowIndex, j) == True:
                         continue
                     else:
-                        st = st + " - " + "(" + str(aug_matrix[i][j]) + "x" + str(j+1) + ")"
-                    soln.append(st)
+                        st = st + " - " + "(" + str(aug_matrix[rowIndex][j]) + "x" + str(j+1) + ")"
+                soln.append(st)
         freevar = ["x"+str(j+1) for j in free]
         basicvar = ["x"+str(j+1) for j in basic]
         solution = (solution, soln, basicvar, freevar)
+        print(solution)
     else:
         solution = ('no solution')
     return solution
