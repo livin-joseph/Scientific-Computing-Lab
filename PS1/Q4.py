@@ -57,8 +57,10 @@ print("Rank of [A:B]: ", rankAB)
 if rankA == rankAB and rankA == var:
     print("Linear system has unique solution")
     soln = []
-    for i in aug_matrix:
-        soln.append(i[var])
+    for i in range(len(aug_matrix)):
+        soln.append(aug_matrix[i][var])
+        if i >= var-1:
+            break
     print("Solution")
     for i in range(len(soln)):
         print("x"+str(i+1), "=", soln[i])
