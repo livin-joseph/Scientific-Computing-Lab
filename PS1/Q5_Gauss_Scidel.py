@@ -20,7 +20,7 @@ def diagdom(coeff_matrix, const_matrix):
     
     new_coeff_matrix = np.array(eqn)
     new_const_matrix = np.array(const)
-    new_aug_matrix = np.concatenate((new_coeff_matrix, new_const_matrix), axis=1)
+    new_aug_matrix = np.concatenate((new_coeff_matrix, new_const_matrix), axis = 1)
 
     flag = dd.diagonallyDominant(new_coeff_matrix)
     if flag == True:

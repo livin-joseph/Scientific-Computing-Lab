@@ -1,50 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Dec 19 22:31:11 2023
+Created on Mon Dec 18 00:56:10 2023
 
 @author: livin
 """
 
-def leadingOne(aug_matrix, i, j):
-    for x in range(j):
-        if aug_matrix[i][x] != 0:
-            return False
-    return True
-
-def REFtoRREF(mat):
-    for i in range(len(mat)-1, 0, -1):
-        for j in range(len(mat[i])):
-            if mat[i][j] == 1 and leadingOne(mat, i, j) == True:
-                for k in range(i-1, -1, -1):
-                    factor = mat[k][j]
-                    mat[k] = [ mat[k][x] - factor * mat[i][x] for x in range(len(mat[0])) ]
-    print("RREF")
-    print(mat)
-
-def matrixToREF(mat):
-    index = 0
-    for j in range(len(mat[0])):
-        flag = False
-        for i in range(len(mat)):
-            if mat[i][j] != 0 and flag == False and i >= index:
-                flag = True
-                factor = mat[i][j]
-                mat[i] = [ x / factor for x in mat[i]]
-                import copy # Swapping rows
-                temp = copy.deepcopy(mat[index])
-                mat[index] = mat[i]
-                mat[i] = temp
-                break
-        for i in range(index + 1, len(mat)):
-            factor = mat[i][j]
-            mat[i] = [ mat[i][x] - factor * mat[index][x] for x in range(len(mat[0])) ]
-        if flag == True:
-            index += 1
-    print("REF")
-    print(mat)
-    REFtoRREF(mat)
-
 def main():
+    import sympy as sp
     import numpy as np
 
     mat = []
@@ -57,13 +19,19 @@ def main():
     for i in range(r):
         arr = []
         for j in range(c):
-            arr.append(float(input()))
+            arr.append(int(input()))
         mat.append(arr)
 
-    mat = np.array(mat)
+    mat = sp.Matrix(mat)
+    RREF = mat.rref()[0]
 
+    mat = np.array(mat.tolist())
+    RREF = np.array(RREF.tolist())
+
+    print("Original matrix")
     print(mat)
-    matrixToREF(mat)
+    print("RREF")
+    print(RREF)
 
 if __name__ == '__main__':
     main()
