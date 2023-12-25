@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Dec 18 22:33:53 2023
+Created on Mon Dec 25 20:15:58 2023
 
 @author: livin
 """
@@ -28,13 +28,15 @@ def diagdom(coeff_matrix, const_matrix):
     else:
         return tuple([False])
     
-def gauss_scidel(aug_matrix, var):
+def gauss_jacobi(aug_matrix, var):
+    import copy
+    temp_var = copy.deepcopy(var)
     for i in range(len(aug_matrix)):
         temp = aug_matrix[i][-1]
         for j in range(len(aug_matrix[0])-1):
             if i == j:
                 continue
-            temp = temp - aug_matrix[i][j] * var[j]
+            temp = temp - aug_matrix[i][j] * temp_var[j]
         temp = temp / aug_matrix[i][i]
         var[i] = temp
     return var
@@ -84,7 +86,7 @@ def main():
     count = 1
     while temp_var != var:
         temp_var = copy.deepcopy(var)
-        var = gauss_scidel(aug_matrix, var)
+        var = gauss_jacobi(aug_matrix, var)
         print("Iteration ", count)
         count += 1
         print(var)
