@@ -18,8 +18,7 @@ def REFtoRREF(mat):
                 for k in range(i-1, -1, -1):
                     factor = mat[k][j]
                     mat[k] = [ mat[k][x] - factor * mat[i][x] for x in range(len(mat[0])) ]
-    print("RREF")
-    print(mat)
+    return mat
 
 def matrixToREF(mat):
     index = 0
@@ -40,9 +39,7 @@ def matrixToREF(mat):
             mat[i] = [ mat[i][x] - factor * mat[index][x] for x in range(len(mat[0])) ]
         if flag == True:
             index += 1
-    print("REF")
-    print(mat)
-    REFtoRREF(mat)
+    return mat
 
 def main():
     import numpy as np
@@ -63,7 +60,10 @@ def main():
     mat = np.array(mat)
 
     print(mat)
-    matrixToREF(mat)
-
+    ref = matrixToREF(mat)
+    print(ref)
+    rref = REFtoRREF(ref)
+    print(rref)
+    
 if __name__ == '__main__':
     main()
