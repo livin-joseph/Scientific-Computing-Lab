@@ -22,6 +22,19 @@ def main():
 
     mat = np.array(mat)
     print(mat)
+    
+    ev = np.linalg.eig(mat)
+    print("Eigen values")
+    eigenvalues = [round(x,4) for x in ev[0]]
+    print(eigenvalues)
+    print("Eigen vectors")
+    for j in range(len(ev[1])):
+        eigenvector = []
+        for i in range(len(ev[1])):
+            eigenvector.append(round(ev[1][i][j],4))
+        print(eigenvector)
+    
+    return
 
     import sys
     sys.path.append("C:/Users/livin/GitHub/Scientific-Computing-Lab/PS1")
