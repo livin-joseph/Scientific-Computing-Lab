@@ -1,12 +1,26 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jan 1 21:35:50 2024
+def EigenValues(mat):
+    import sympy as sp
+    n = sp.shape(mat)[0]
 
-@author: livin
-"""
+    lam = sp.Symbol('lambda')
+    print(n)
+    newmat = mat - lam * sp.eye(n)
+    char_eq = newmat.det()
+    print("Characteristic equation: ", char_eq)
+    ev = sp.solveset(char_eq, lam)
+    ev = [round(i, 2) for i in ev]
+    return ev   
+
+def EigenVectors(mat, ev):
+    import sympy as sp
+    n = sp.shape(mat)[0]
+    
+    tempmat = mat - ev * sp.eye(n)
+    tempmat = tempmat.col_insert(n, sp.Matrix([0] * n))
+    evec = sp.linsolve(tempmat)
+    return evec
 
 def main():
-    import numpy as np
     import sympy as sp
 
     mat = []
@@ -21,29 +35,14 @@ def main():
             arr.append(int(input()))
         mat.append(arr)
 
-    mat = np.array(mat)
     mat = sp.Matrix(mat)
     print(mat)
 
-    """
-    import sys
-    sys.path.append("C:/Users/livin/GitHub/Scientific-Computing-Lab/PS1")
-    import Q3_Matrix_to_RREF as rref
-    """
-
-    lam = sp.Symbol('lambda')
-    newmat = mat - lam * sp.eye(n)
-    char_eq = newmat.det()
-    print("Characteristic equation: ",char_eq)
-    ev = sp.solveset(char_eq, lam)
-    ev = [round(i, 2) for i in ev]
+    ev = EigenValues(mat)
     print("Eigenvalues: ", ev)
 
     for i in ev:
-        tempmat = newmat.subs(lam, i)
-        tempmat = tempmat.col_insert(n, sp.Matrix([0] * n))
-        evec = sp.linsolve(tempmat)
-        print("Eigenvectors corresponding to eigenvalue ", i, ": ", evec)
+        print("Eigenvectors corresponding to eigenvalue ", i, ": ", EigenVectors(mat, i))
 
 if __name__ == '__main__':
     main()

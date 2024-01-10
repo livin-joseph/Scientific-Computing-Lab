@@ -5,6 +5,11 @@ Created on Thu Dec 14 15:18:44 2023
 @author: 22pd20
 """
 
+"""
+import sys
+sys.path.append("C:/Users/livin/GitHub/Scientific-Computing-Lab/PS1")
+import Q3_Matrix_to_RREF as rref
+"""
 
 import matplotlib.pyplot as plt
 

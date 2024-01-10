@@ -1,0 +1,31 @@
+def main():
+    import sympy as sp
+
+    mat = []
+
+    n = int(input("Enter number of rows/columns: "))
+
+    print("Enter the elements of the matrix")
+
+    for i in range(n):
+        arr = []
+        for j in range(n):
+            arr.append(int(input()))
+        mat.append(arr)
+
+    mat = sp.Matrix(mat)
+    print(mat)
+
+    print("Diagonalized matrix")
+    P, B = mat.diagonalize()
+    print(B)
+
+    import Q1_EigenValues_and_EigenVectors as evev
+    ev = evev.EigenValues(mat)
+    print("Eigenvalues: ", ev)
+
+    for i in ev:
+        print("Eigenvectors corresponding to eigenvalue ", i, ": ", evev.EigenVectors(mat, i))
+
+if __name__ == '__main__':
+    main()
