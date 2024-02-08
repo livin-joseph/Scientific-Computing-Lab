@@ -3,6 +3,7 @@ def main():
 
     mat = []
 
+    print("Enter the quadratic form as a matrix")
     n = int(input("Enter number of rows/columns: "))
 
     print("Enter the elements of the matrix")
@@ -16,16 +17,14 @@ def main():
     mat = sp.Matrix(mat)
     print(mat)
 
-    print("Diagonalized matrix")
-    P, B = mat.diagonalize()
-    print(B)
-
-    import Q1_EigenValues_and_EigenVectors as evev
-    ev = evev.EigenValues(mat)
-    print("Eigenvalues: ", ev)
-
-    for i in ev:
-        print("Eigenvectors corresponding to eigenvalue ", i, ": ", evev.EigenVectors(mat, i))
+    P, dmat = mat.diagonalize()
+    print(dmat)
+    print("Canonical form")
+    for i in range(n):
+        print("(" + str(dmat[i,i]) + ")", "x" + str(i+1), "^2", end=" ")
+        if i != n-1:
+            print(" + ", end=" ")
+    print()
 
 if __name__ == '__main__':
     main()
