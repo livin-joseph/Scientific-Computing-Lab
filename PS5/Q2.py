@@ -44,7 +44,6 @@ def cholesky1(mat):
     lowmat = np.matrix(var_mat)
 
     new_mat = np.dot(lowmat, lowmat.T)
-    print(new_mat, var_list)
 
     eq_list = []
     for i in range(0, n):
@@ -98,7 +97,7 @@ def main():
         print("Cholesky Decomposition cannot be applied")
         return
     
-    L, U = cholesky2(mat)
+    L, U = cholesky(mat)
 
     print("Choleskey Decomposition")
     print("L")
