@@ -1,7 +1,7 @@
 def main():
     import numpy as np
     import sys
-    sys.path.insert(0, r'C:\Users\livin\GitHub\Scientific-Computing-Lab')
+    sys.path.append(r'C:\Users\livin\GitHub\Scientific-Computing-Lab')
     import PS1.Q3_Matrix_to_RREF as pack
 
     mat = []
