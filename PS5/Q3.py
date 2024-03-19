@@ -23,6 +23,7 @@ def LU(matrix):
 
     return lower, upper
 
+def LU1(mat):
     import numpy as np
     import sympy as sp
     
