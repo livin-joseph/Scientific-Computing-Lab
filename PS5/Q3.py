@@ -28,11 +28,6 @@ def LU1(mat):
     import sympy as sp
     
     n = mat.shape[0]
-    lower = np.identity(n)
-    upper = np.zeros(n)
-    
-    no_of_var_lower = int((n - 1) * n / 2)
-    no_of_var_upper = int(n * (n + 1) / 2)
 
     var_list = []
     var_mat_lower = []
