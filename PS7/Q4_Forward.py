@@ -12,7 +12,6 @@ def NF(xx, y):
         for j in range(n - i): 
             yy[j][i] = yy[j + 1][i - 1] - yy[j][i - 1]
     x = sp.Symbol('x')
-    c = sp.Symbol('c')
     h = xx[1] - xx[0]
     c = (x - xx[0]) / h
     eq = yy[0][0]
