@@ -1,37 +1,42 @@
-import numpy as np
 import sympy as sp
-import matplotlib.pyplot as plt
+import numpy as np
 
-def divided_diff(xx, y, interpolate_x):
-    n = len(xx)
-    yy = np.zeros((n,n))
+def divided_diff(xval, yval):
+    n = len(xval)
+    a = np.zeros((n, n))
 
     for i in range(n):
-        yy[i][0] = y[i]
+        a[i][0] = yval[i]
 
-    for i in range(1, n): 
-        for j in range(n - i): 
-            yy[j][i] = ((yy[j][i - 1] - yy[j + 1][i - 1]) / (xx[j] - xx[i + j]))
+    for i in range(1, n):
+        for j in range(n - i):
+            a[j][i] = (a[j][i-1] - a[j+1][i-1]) / (xval[j] - xval[i+j])
+
+    yt = np.reshape(yval, (len(yval), 1))
+    a = np.concatenate((yt, a), axis = 1)
+    print("Divided Difference Table: ")
+    print(a)
 
     x = sp.Symbol('x')
-    eq = yy[0][0]
-
-    for i in range(1,n):
+    eq = a[0][1]
+    for i in range(1, n):
         f = 1
-        for j in range(1,i+1):
-            f = f * (x - xx[j-1])
-        f = f * yy[0][j]
+        for j in range(1, i+1):
+            f = f * (x - xval[j-1])
+        f = f * a[0][j+1]
         eq = eq + f
 
-    print("f(", interpolate_x, ") = ", eq.subs(x, interpolate_x))
-    print('Divided Difference Table\n', yy)
-    print('Polynomial: ', eq)
+    print('Interpolating polynomial: ', eq)
+    xp = float(input("Enter the value of x: "))
+    print("f(", xp, ") = ", eq.subs(x, xp))
 
-    xvalues = np.linspace(min(xx), max(xx), 1000)
+    xvalues = np.linspace(min(xval), max(xval), 1000)
     yvalues = [eq.subs(x, xv) for xv in xvalues]
 
+    import matplotlib.pyplot as plt
+
     plt.plot(xvalues, yvalues)
-    plt.scatter(xx, y)
+    plt.scatter(xval, yval)
     plt.show()
 
 x_q4_a = [654, 658, 659, 661]
@@ -40,7 +45,8 @@ y_q4_a = [2.8156, 2.8182, 2.8189, 2.8202]
 x_q4_b = [0, 0.1, 0.2, 0.3, 0.4]
 y_q4_b = [1, 1.1052, 1.2214, 1.3499, 1.4918]
 
-print("\nQuestion 4 a\n")
-divided_diff(x_q4_a, y_q4_a, 656)
-print("\nQuestion 4 b\n")
-divided_diff(x_q4_b, y_q4_b, 0.38)
+print("Question 4 a")
+divided_diff(x_q4_a, y_q4_a)
+
+print("Question 4 b")
+divided_diff(x_q4_b, y_q4_b)

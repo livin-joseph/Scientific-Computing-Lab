@@ -24,10 +24,9 @@ coeff = sp.solve([eq1, eq2, eq3], [a, b, c])
 eq = coeff[a] * x**2 + coeff[b] * x + coeff[c]
 yp = eq.subs(x, xp)
 
-print("Quadratic equation: ", eq)
-print("f(", x, ") = ", yp)
+print("Interpolating polynomial: ", eq)
+print("f(", xp, ") = ", yp)
 
-# Plotting
 import numpy as np
 xt = [x1, x2, x3]
 x_var = np.linspace(max(xt), min(xt), 1001)
