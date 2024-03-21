@@ -39,24 +39,24 @@ def cubic_spline(xvalues, yvalues):
 
     solution = sp.solve(eqn, var)
 
-    print(solution)
-
     eq = []
     for i in range(0, 4*(n-1), 4):
         t = solution[var[i]] * x**3 + solution[var[i+1]] * x**2 + solution[var[i+2]] * x + solution[var[i+3]]
         eq.append(t)
 
-    print(eq)
+    print("Equations")
+    for i in range(len(eq)):
+        print(eq[i], ' : ', xvalues[i], ' < x <= ', xvalues[i+1])
+
+    xp = float(input("Enter the value of x: "))
+    print("f(", xp, ") = ", fun(xp, eq, xvalues))
 
     import numpy as np
     import matplotlib.pyplot as plt
 
     x_val = np.linspace(min(xvalues), max(xvalues), 1000)
     x_val = np.linspace(0, 3, 1000)
-    y_val = []
-
-    for i in x_val:
-        y_val.append(fun(i, eq, xvalues))
+    y_val = [fun(i, eq, xvalues) for i in x_val]
 
     plt.plot(x_val, y_val, label = 'Cubic spline interpolation (Manual)')
 

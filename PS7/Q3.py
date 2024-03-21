@@ -1,4 +1,6 @@
-def lagrange(xvalues, yvalues):
+def inverse_lagrange(xvalues, yvalues):
+    xvalues, yvalues = yvalues, xvalues
+
     n = len(xvalues)
 
     import sympy as sp
@@ -17,9 +19,6 @@ def lagrange(xvalues, yvalues):
 
     print("Interpolating polynomial: ", eqn)
 
-    xp = float(input("Enter the value of x: "))
-    print("f(", xp, ") = ", eqn.subs(x, xp))
-
     import numpy as np
     import matplotlib.pyplot as plt
 
@@ -33,7 +32,7 @@ def lagrange(xvalues, yvalues):
 def main():
     xvalues = [0, 1, 2, 3]
     yvalues = [1, 2, 9, 28]
-    lagrange(xvalues, yvalues)
+    inverse_lagrange(xvalues, yvalues)
 
 if __name__ == '__main__':
     main()
