@@ -25,8 +25,6 @@ def cholesky1(mat):
     import sympy as sp
 
     n = mat.shape[0]
-    no_of_var = int(n * (n + 1) / 2)
-
     var_list = []
     var_mat = []
 
