@@ -19,11 +19,10 @@ def cubic_spline(xvalues, yvalues):
     eqn = []
     j = 0
     for i in range(0, 4*(n-1), 4):
-        print(i)
         t = var[i] * x**3 + var[i+1] * x**2 + var[i+2] * x + var[i+3]
         eqn.append(sp.Eq(t.subs(x, xvalues[j]), yvalues[j]))
         eqn.append(sp.Eq(t.subs(x, xvalues[j+1]), yvalues[j+1]))
-    
+
         if i == 0:
             eqn.append(sp.Eq(sp.diff(sp.diff(t, x), x).subs(x, xvalues[0]), 0))
 
