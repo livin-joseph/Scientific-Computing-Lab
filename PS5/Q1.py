@@ -36,6 +36,8 @@ def main():
     print(rref)
     print("Inverse of matrix")
     print(rref[:, n:])
+    print("Matrix * Inverse of matrix")
+    print(np.dot(mat, rref[:, n:]))
 
 if __name__ == '__main__':
     main()
