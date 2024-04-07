@@ -3,16 +3,15 @@ import pandas as pd
 
 x, y = sp.symbols('x y')
 
-df = pd.DataFrame(columns=['x', 'y', 'dy/dx', 'y_np', 'x_n', 'dy/dx_n', 'yn_c'])
+df = pd.DataFrame(columns=['x', 'y', 'dy/dx', 'dy/dx_n', 'yn_c'])
 
 def modified_euler(f, xi, yi, xt):
     h = 0.01
     
     dydx = f.subs(x, xi).subs(y, yi)
-    yn_p = yi + h * f.subs(x, xi).subs(y, yi)
-    dydxn = f.subs(x, xi + h).subs(y, yn_p)
-    
-    t = [xi, yi, dydx, yn_p, xi + h, dydxn, yi + h * (dydx + dydxn) / 2]
+    dydxn = f.subs(x, xi + h).subs(y, yi + h * dydx)
+
+    t = [xi, yi, dydx, dydxn, yi + h * (dydx + dydxn) / 2]
     df.loc[len(df)] = t
 
     xi = xi + h
@@ -20,10 +19,9 @@ def modified_euler(f, xi, yi, xt):
     
     while xi != xt:
         dydx = f.subs(x, xi).subs(y, yi)
-        yn_p = yi + h * f.subs(x, xi).subs(y, yi)
-        dydxn = f.subs(x, xi + h).subs(y, yn_p)
+        dydxn = f.subs(x, xi + h).subs(y, yi + h * (dydx + dydxn) / 2)
         
-        t = [xi, yi, dydx, yn_p, xi + h, dydxn, yi + h * (dydx + dydxn) / 2]
+        t = [xi, yi, dydx, dydxn, yi + h * (dydx + dydxn) / 2]
         df.loc[len(df)] = t
 
         xi = round(xi + h, 4)
