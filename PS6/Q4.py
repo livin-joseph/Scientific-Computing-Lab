@@ -10,7 +10,7 @@ def divided_diff(xval, yval):
 
     for i in range(1, n):
         for j in range(n - i):
-            a[j][i] = (a[j][i-1] - a[j+1][i-1]) / (xval[j] - xval[i+j])
+            a[j][i] = (a[j+1][i-1] - a[j][i-1]) / (xval[i+j] - xval[j])
 
     yt = np.reshape(yval, (len(yval), 1))
     a = np.concatenate((yt, a), axis = 1)
@@ -25,6 +25,7 @@ def divided_diff(xval, yval):
             f = f * (x - xval[j-1])
         f = f * a[0][j+1]
         eq = eq + f
+    eq = sp.simplify(eq)
 
     print('Interpolating polynomial: ', eq)
     xp = float(input("Enter the value of x: "))
