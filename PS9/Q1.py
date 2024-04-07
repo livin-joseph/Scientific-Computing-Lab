@@ -1,5 +1,4 @@
 import sympy as sp
-import math
 
 x, y = sp.symbols('x y')
 
