@@ -3,7 +3,7 @@ import numpy as np
 import sympy as sp
 import math
 
-def NF(xx, y):
+def NB(xx, y):
     n = len(xx)
     yy = np.zeros((n,n))
     for i in range(n):
@@ -30,7 +30,7 @@ y = [4.8, 8.4, 14.5, 23.6, 36.2, 52.8, 73.9]
 
 x = sp.Symbol('x')
 
-s, t = NF(xx, y)
+s, t = NB(xx, y)
 
 print('Interpolated Value when x = 3.5 : ', round(s.subs(x, 3.5), 4))
 print('Interpolated Value when x = 8.5 : ', round(s.subs(x, 8.5), 4))
